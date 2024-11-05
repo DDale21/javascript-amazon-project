@@ -1,6 +1,6 @@
-const cart = [];
+export const cart = [];
 
-const getTotalCartQuantity = () => {
+export const getTotalCartQuantity = () => {
   let total = 0;
   cart.forEach((item) => {
     total += item.quantity;

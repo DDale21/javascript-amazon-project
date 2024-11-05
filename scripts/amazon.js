@@ -1,3 +1,5 @@
+import { cart, getTotalCartQuantity } from "../data/cart.js";
+
 const convertRating = (stars) => {
   let result;
   if (stars === 0) {
