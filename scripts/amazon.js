@@ -104,6 +104,7 @@ products.forEach((product) => {
         });
       }
 
+      document.querySelector('.js-cart-quantity').innerHTML = getTotalCartQuantity();
     });
   });
 
