@@ -2,6 +2,8 @@ import * as cartModule from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
+document.querySelector('.js-cart-quantity').innerHTML = cartModule.getCartItemQuantity();
+
 const convertRating = (stars) => {
   let result;
   if (stars === 0) {
@@ -87,19 +89,10 @@ products.forEach((product) => {
   });
   document.querySelector('.js-products-grid').innerHTML = productsHtml;
 
-  const updateTotalCartQuantity = () => {
-    let total = 0;
-    cartModule.cart.forEach((item) => {
-      total += item.quantity;
-    });
-    document.querySelector('.js-cart-quantity').innerHTML = total;
-  };
-
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click',  () => {
       const productId = button.dataset.productId;
       cartModule.addToCart(productId);
-      updateTotalCartQuantity();
+      document.querySelector('.js-cart-quantity').innerHTML = cartModule.getCartItemQuantity();
     });
   });
-

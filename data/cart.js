@@ -14,6 +14,14 @@ export const saveToStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+export const getCartItemQuantity = () => {
+  let total = 0;
+  cart.forEach((item) => {
+    total += item.quantity;
+  });
+  return total;
+}
+
 export const addToCart = (productId) => {
   let existingItem;
   
