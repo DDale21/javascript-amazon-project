@@ -14,6 +14,16 @@ export const saveToStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+export const getItem = (productId) => {
+  let item;
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId) {
+      item = cartItem;
+    }
+  });
+  return item;
+}
+
 export const getCartItemQuantity = () => {
   let total = 0;
   cart.forEach((item) => {
@@ -55,4 +65,15 @@ export const removeFromCart = (productId) => {
   cart = newCart;
 
   saveToStorage();
+}
+
+export const setItemQuantity = (productId, newQuantity) => {
+  const item = getItem(productId);
+  item.quantity = newQuantity;
+  saveToStorage();
+}
+
+export const getItemQuantity = (productId) => {
+  const item = getItem(productId);
+  return item.quantity;
 }
