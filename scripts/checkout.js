@@ -114,14 +114,17 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
     const productId = saveLink.dataset.productId;
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     const input = document.querySelector(`.js-new-quantity-input-${productId}`);
-    cartModule.setItemQuantity(productId, Number(input.value));
+    if (input.value <= 0) {
+      alert("Cannot set quantity to 0, Delete item instead");
+    } else {
+      cartModule.setItemQuantity(productId, Number(input.value));
+      const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+      quantityLabel.innerHTML = cartModule.getItemQuantity(productId);
 
-    const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-    quantityLabel.innerHTML = cartModule.getItemQuantity(productId);
+      updateTotalCartItemsElement();
 
-    updateTotalCartItemsElement();
-
-    container.classList.remove('is-editing-quantity');
+      container.classList.remove('is-editing-quantity');
+    }
   });
 });
 
