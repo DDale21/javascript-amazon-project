@@ -7,6 +7,8 @@ const updateTotalCartItemsElement = () => {
   totalCartItemsElement.innerHTML = `${cartModule.getCartItemQuantity()} items`;
 }
 
+updateTotalCartItemsElement();
+
 let checkoutItemsHtml = '';
 cartModule.cart.forEach((item) => {
   const product = productModule.getProductById(item.productId);
@@ -117,7 +119,7 @@ document.querySelectorAll('.js-save-quantity-link').forEach((saveLink) => {
     const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
     quantityLabel.innerHTML = cartModule.getItemQuantity(productId);
 
-    totalCartItemsElement.innerHTML = `${cartModule.getCartItemQuantity()} items`;
+    updateTotalCartItemsElement();
 
     container.classList.remove('is-editing-quantity');
   });
@@ -128,7 +130,7 @@ document.querySelectorAll('.js-delete-quantity-link').forEach((deleteLink) => {
     const productId = deleteLink.dataset.productId;
     cartModule.removeFromCart(productId);
 
-    totalCartItemsElement.innerHTML = `${cartModule.getCartItemQuantity()} items`;
+    updateTotalCartItemsElement();
 
     document.querySelector(`.js-cart-item-container-${productId}`).remove();
   });
