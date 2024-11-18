@@ -17,13 +17,13 @@ export const saveToStorage = () => {
 }
 
 export const getItem = (productId) => {
-  let item;
-  cart.forEach((cartItem) => {
-    if (cartItem.productId === productId) {
-      item = cartItem;
+  let existingItem;
+  cart.forEach((item) => {
+    if (item.productId === productId) {
+      existingItem = item;
     }
   });
-  return item;
+  return existingItem;
 }
 
 export const getCartItemQuantity = () => {
@@ -35,13 +35,7 @@ export const getCartItemQuantity = () => {
 }
 
 export const addToCart = (productId) => {
-  let existingItem;
-  
-  cart.forEach((item) => {
-    if (productId === item.productId) {
-      existingItem = item;
-    }
-  });
+  let existingItem = getItem(productId);
 
   if (existingItem) {
     existingItem.quantity += 1;
@@ -79,4 +73,11 @@ export const setItemQuantity = (productId, newQuantity) => {
 export const getItemQuantity = (productId) => {
   const item = getItem(productId);
   return item.quantity;
+}
+
+export const updateDeliveryOption = (productId, deliveryOptionId) => {
+  let existingItem = getItem(productId);
+  existingItem.deliveryOptionId = deliveryOptionId;
+
+  saveToStorage();
 }
