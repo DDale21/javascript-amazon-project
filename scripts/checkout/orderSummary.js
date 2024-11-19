@@ -2,7 +2,7 @@ import * as cartModule from "../../data/cart.js";
 import * as productModule from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import { deliveryOptions, getDeliveryOptionById } from "../../data/deliveryOptions.js";
 
 const updateTotalCartItemsElement = () => {
   const totalCartItemsElement = document.querySelector('.js-cart-item-count');
@@ -52,12 +52,8 @@ export function renderOrderSummary () {
   cartModule.cart.forEach((item) => {
     const product = productModule.getProductById(item.productId);
 
-    let deliveryDate;
-    deliveryOptions.forEach((option) => {
-      if (option.id === item.deliveryOptionId) {
-        deliveryDate = dayjs().add(option.deliveryDays, 'days').format('dddd, MMMM D');
-      }
-    });
+    const deliveryOption = getDeliveryOptionById(item.deliveryOptionId);
+    const deliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days').format('dddd, MMMM D');
 
     checkoutItemsHtml += `
       <div class="cart-item-container js-cart-item-container-${item.productId}">

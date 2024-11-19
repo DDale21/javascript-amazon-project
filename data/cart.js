@@ -1,3 +1,7 @@
+import { getProductById } from "./products.js";
+import formatCurrency from "../scripts/utils/money.js";
+import { getDeliveryOptionById } from "./deliveryOptions.js";
+
 export let cart = JSON.parse(localStorage.getItem('cart'));
 
 if (!cart) {
@@ -80,4 +84,30 @@ export const updateDeliveryOption = (productId, deliveryOptionId) => {
   existingItem.deliveryOptionId = deliveryOptionId;
 
   saveToStorage();
+}
+
+export const calculateProductTotalPrice = () => {
+  let total = 0;
+  cart.forEach((cartItem) => {
+    const matchingProduct = getProductById(cartItem.productId);
+    const itemPrice = matchingProduct.priceCents * cartItem.quantity;
+    total += itemPrice;
+  });
+  return total;
+}
+
+export const calculateShippingTotal = () => {
+  let total = 0;
+  cart.forEach((cartItem) => {
+    const deliveryOption = getDeliveryOptionById(cartItem.deliveryOptionId);
+    total += deliveryOption.priceCents;
+  })
+  return total;
+}
+
+export const calculateOrderTotalPrice = () => {
+  const totalBeforeTax = calculateProductTotalPrice() + calculateShippingTotal();
+  const tax = totalBeforeTax * 0.1;
+  const total = totalBeforeTax + tax;
+  return formatCurrency(total);
 }
