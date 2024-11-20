@@ -2,20 +2,14 @@ import * as cartModule from "../../data/cart.js";
 import * as productModule from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { deliveryOptions, getDeliveryOptionById } from "../../data/deliveryOptions.js";
+import { deliveryOptions, getDeliveryOptionById, getDeliveryDate } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
-
-const updateTotalCartItemsElement = () => {
-  const totalCartItemsElement = document.querySelector('.js-cart-item-count');
-  totalCartItemsElement.innerHTML = `${cartModule.getCartItemQuantity()} items`;
-}
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 function deliveryOptionsHTML(productId, item) {
   let result = '';
   deliveryOptions.forEach((deliveryOption) => {
-    const deliveryDate = dayjs()
-      .add(deliveryOption.deliveryDays, 'days')
-      .format('dddd, MMMM D');
+    const deliveryDate = getDeliveryDate(deliveryOption);
 
     const deliveryPrice = deliveryOption.priceCents === 0
       ? 'FREE'
@@ -47,14 +41,12 @@ function deliveryOptionsHTML(productId, item) {
 
 export function renderOrderSummary () {
 
-  updateTotalCartItemsElement();
-
   let checkoutItemsHtml = '';
   cartModule.cart.forEach((item) => {
     const product = productModule.getProductById(item.productId);
 
     const deliveryOption = getDeliveryOptionById(item.deliveryOptionId);
-    const deliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days').format('dddd, MMMM D');
+    const deliveryDate = getDeliveryDate(deliveryOption);
 
     checkoutItemsHtml += `
       <div class="cart-item-container js-cart-item-container-${item.productId}">
@@ -127,7 +119,7 @@ export function renderOrderSummary () {
         const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
         quantityLabel.innerHTML = cartModule.getItemQuantity(productId);
 
-        updateTotalCartItemsElement();
+        renderCheckoutHeader();
 
         renderPaymentSummary();
 
@@ -141,9 +133,9 @@ export function renderOrderSummary () {
       const productId = deleteLink.dataset.productId;
       cartModule.removeFromCart(productId);
 
-      updateTotalCartItemsElement();
+      renderCheckoutHeader();
 
-      document.querySelector(`.js-cart-item-container-${productId}`).remove();
+      renderOrderSummary();
 
       renderPaymentSummary();
     });
