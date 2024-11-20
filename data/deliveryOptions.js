@@ -25,6 +25,14 @@ export const getDeliveryOptionById = (deliveryOptionId) => {
 }
 
 export const getDeliveryDate = (deliveryOption) => {
-  const deliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days').format('dddd, MMMM D');
-  return deliveryDate;
+  const targetDeliveryDate = dayjs().add(deliveryOption.deliveryDays, 'days');
+  let deliveryDays = deliveryOption.deliveryDays;
+
+  if (targetDeliveryDate.day() === 6) {
+    deliveryDays += 2
+  } else if (targetDeliveryDate.day() === 0) {
+    deliveryDays += 1
+  }
+  
+  return dayjs().add(deliveryDays, 'days').format('dddd, MMMM D');
 }
