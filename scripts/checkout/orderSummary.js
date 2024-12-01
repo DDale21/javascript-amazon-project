@@ -49,7 +49,7 @@ export function renderOrderSummary () {
     const deliveryDate = getDeliveryDate(deliveryOption);
 
     checkoutItemsHtml += `
-      <div class="cart-item-container js-cart-item-container-${item.productId}">
+      <div class="cart-item-container js-cart-item-container js-cart-item-container-${item.productId}">
         <div class="delivery-date">
           Delivery date: ${deliveryDate}
         </div>
@@ -65,7 +65,7 @@ export function renderOrderSummary () {
             <div class="product-price">
               $${formatCurrency(product.priceCents)}
             </div>
-            <div class="product-quantity">
+            <div class="product-quantity js-product-quantity-${product.id}">
               <span>
                 Quantity: <span class="quantity-label js-quantity-label-${product.id}">${item.quantity}</span>
               </span>
@@ -78,7 +78,8 @@ export function renderOrderSummary () {
               data-product-id="${product.id}">
                 Save
               </span>
-              <span class="delete-quantity-link link-primary js-delete-quantity-link" 
+              <span class="delete-quantity-link link-primary js-delete-quantity-link 
+              js-delete-quantity-link-${product.id}" 
               data-product-id="${product.id}">
                 Delete
               </span>
