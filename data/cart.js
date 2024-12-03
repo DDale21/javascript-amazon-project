@@ -86,7 +86,15 @@ export const getItemQuantity = (productId) => {
 }
 
 export const updateDeliveryOption = (productId, deliveryOptionId) => {
-  let existingItem = getItem(productId);
+  const existingDeliveryOption = getDeliveryOptionById(deliveryOptionId);
+  if (!existingDeliveryOption) {
+    return;
+  }
+
+  const existingItem = getItem(productId);
+  if (!existingItem) {
+    return;
+  }
   existingItem.deliveryOptionId = deliveryOptionId;
 
   saveToStorage();
