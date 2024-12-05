@@ -4,33 +4,7 @@ import { formatCurrency } from "./utils/money.js";
 
 document.querySelector('.js-cart-quantity').innerHTML = cartModule.getCartItemQuantity();
 
-const convertRating = (stars) => {
-  let result;
-  if (stars === 0) {
-    result = 'rating-0.png';
-  } else if (stars === 0.5) {
-    result = 'rating-05.png';
-  } else if (stars === 1) {
-    result = 'rating-10.png';
-  } else if (stars === 1.5) {
-    result = 'rating-15.png';
-  } else if (stars === 2) {
-    result = 'rating-20.png';
-  } else if (stars === 2.5) {
-    result = 'rating-25.png';
-  } else if (stars === 3) {
-    result = 'rating-30.png';
-  } else if (stars === 3.5) {
-    result = 'rating-35.png';
-  } else if (stars === 4) {
-    result = 'rating-40.png';
-  } else if (stars === 4.5) {
-    result = 'rating-45.png';
-  } else if (stars === 5) {
-    result = 'rating-50.png';
-  }
-  return result;
-}
+
 
 let productsHtml = '';
 
@@ -48,14 +22,14 @@ products.forEach((product) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/${convertRating(product.rating.stars)}">
+              src="images/ratings/${product.getRatingUrl()}">
             <div class="product-rating-count link-primary">
               ${product.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            $${formatCurrency(product.priceCents)}
+            $${product.getPrice()}
           </div>
 
           <div class="product-quantity-container">

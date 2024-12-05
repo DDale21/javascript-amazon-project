@@ -1,3 +1,5 @@
+import formatCurrency from "../scripts/utils/money.js";
+
 export function getProductById (productId) {
   let result;
   products.forEach((product) => {
@@ -6,6 +8,54 @@ export function getProductById (productId) {
     }
   });
   return result;
+}
+
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents
+  }
+
+  getRatingUrl() {
+    let result;
+    if (this.rating.stars === 0) {
+      result = 'rating-0.png';
+    } else if (this.rating.stars === 0.5) {
+      result = 'rating-05.png';
+    } else if (this.rating.stars === 1) {
+      result = 'rating-10.png';
+    } else if (this.rating.stars === 1.5) {
+      result = 'rating-15.png';
+    } else if (this.rating.stars === 2) {
+      result = 'rating-20.png';
+    } else if (this.rating.stars === 2.5) {
+      result = 'rating-25.png';
+    } else if (this.rating.stars === 3) {
+      result = 'rating-30.png';
+    } else if (this.rating.stars === 3.5) {
+      result = 'rating-35.png';
+    } else if (this.rating.stars === 4) {
+      result = 'rating-40.png';
+    } else if (this.rating.stars === 4.5) {
+      result = 'rating-45.png';
+    } else if (this.rating.stars === 5) {
+      result = 'rating-50.png';
+    }
+    return result;
+  }
+
+  getPrice() {
+    return formatCurrency(this.priceCents)
+  }
 }
 
 export const products = [
@@ -667,4 +717,6 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetails) => {
+  return new Product(productDetails);
+});
