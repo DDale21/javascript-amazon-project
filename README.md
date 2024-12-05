@@ -2,6 +2,8 @@
 
 This project is a clone of Amazon's online store, built by following a YouTube tutorial made by SuperSimpleDev.
 I am building this project as a learning exercise to enhance and broaden my skills in full-stack development, allowing me to gain hands-on experience with building a complex web application.
+This will serve as a preparation for future projects.
+Throughout this project, I will demonstrate and continue to enhance my Git knowledge for managing projects.
 
 
 Project Overview
@@ -11,7 +13,8 @@ By following this tutorial, i am working to strengthen my understanding of:
 
   - HTML and CSS to design and create a responsive UI.
   - Interactive UI elements using JavaScript.
-  - Data Structures, CRUD operations, Objects, JSOn, and DOM
+  - Data Structures, CRUD operations, Object-oriented programming, MVC, JSON, and DOM.
+  - Git
 
 Features
 
