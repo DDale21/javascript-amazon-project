@@ -1,7 +1,6 @@
-import * as cartModule from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js"
 import * as productModule from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
-import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOptionById, getDeliveryDate } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
@@ -44,7 +43,7 @@ function deliveryOptionsHTML(productId, item) {
 export function renderOrderSummary () {
 
   let checkoutItemsHtml = '';
-  cartModule.cart.forEach((item) => {
+  cart.cartItems.forEach((item) => {
     const product = productModule.getProductById(item.productId);
 
     const deliveryOption = getDeliveryOptionById(item.deliveryOptionId);
@@ -118,9 +117,9 @@ export function renderOrderSummary () {
       if (input.value <= 0) {
         alert("Cannot set quantity to 0, Delete item instead");
       } else {
-        cartModule.setItemQuantity(productId, Number(input.value));
+        cart.setItemQuantity(productId, Number(input.value));
         const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-        quantityLabel.innerHTML = cartModule.getItemQuantity(productId);
+        quantityLabel.innerHTML = cart.getItemQuantity(productId);
 
         renderCheckoutHeader();
 
@@ -134,7 +133,7 @@ export function renderOrderSummary () {
   document.querySelectorAll('.js-delete-quantity-link').forEach((deleteLink) => {
     deleteLink.addEventListener('click', () => {
       const productId = deleteLink.dataset.productId;
-      cartModule.removeFromCart(productId);
+      cart.removeFromCart(productId);
 
       renderCheckoutHeader();
 
@@ -147,7 +146,7 @@ export function renderOrderSummary () {
   document.querySelectorAll('.js-delivery-option').forEach((element) => {
     element.addEventListener('click', () => {
       const {productId, deliveryOptionId} = element.dataset;
-      cartModule.updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
 
       renderOrderSummary();
 
