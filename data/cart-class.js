@@ -130,6 +130,20 @@ class Cart {
     const total = totalBeforeTax + tax;
     return formatCurrency(total);
   }
+
+  loadCart(fun) {
+    const xhr = new XMLHttpRequest();
+  
+    xhr.addEventListener('load', () => {
+      console.log(xhr.response);
+  
+      fun();
+  
+    });
+  
+    xhr.open('GET', 'http://supersimplebackend.dev/cart')
+    xhr.send();
+  }
 }
 
 export let cart = new Cart('cart-oop');

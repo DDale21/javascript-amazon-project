@@ -3,7 +3,7 @@ import { cart } from "../../data/cart-class.js"
 import { getProductById } from "../../data/products.js";
 import formatCurrency from "../../scripts/utils/money.js";
 import { renderPaymentSummary } from "../../scripts/checkout/paymentSummary.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProducts, loadProductsFetch } from "../../data/products.js";
 
 describe('test suite: renderOrderSummary', () => {
   const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
@@ -11,7 +11,7 @@ describe('test suite: renderOrderSummary', () => {
 
   //done lets the code wait until it is called
   beforeAll((done) => {
-    loadProducts(() => {
+    loadProductsFetch().then(() => {
       done();
     });
   });
