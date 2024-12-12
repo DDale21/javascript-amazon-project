@@ -53,6 +53,22 @@ class Product {
     return result;
   }
 
+  getId() {
+    return this.id;
+  }
+
+  getImage() {
+    return this.image;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getRating() {
+    return this.rating;
+  }
+
   getPrice() {
     return formatCurrency(this.priceCents)
   }
@@ -114,6 +130,9 @@ export function loadProductsFetch() {
   return promise;
 }
 
+await loadProductsFetch();
+
+/*
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
@@ -138,6 +157,7 @@ export function loadProducts(fun) {
   xhr.open('GET', 'http://supersimplebackend.dev/products')
   xhr.send();
 }
+*/
 
 //load products from local
 /*
