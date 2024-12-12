@@ -27,6 +27,15 @@ class Cart {
     }
   }
 
+  async loadCartFetch () {
+    const response = await fetch('https://supersimplebackend.dev/cart');
+    this.loadCart(response);
+  }
+
+  async loadCart(response) {
+    console.log((await response.text()));
+  }
+
   saveToStorage() {
     localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
@@ -131,23 +140,27 @@ class Cart {
     return formatCurrency(total);
   }
 
-  loadCart(fun) {
-    const xhr = new XMLHttpRequest();
-  
-    xhr.addEventListener('load', () => {
-      console.log(xhr.response);
-  
-      fun();
-  
-    });
-  
-    xhr.open('GET', 'http://supersimplebackend.dev/cart')
-    xhr.send();
-  }
 }
 
 export let cart = new Cart('cart-oop');
+
 //let businessCart = new Cart('cart-business');
 
 //console.log(cart);
 //console.log(businessCart);
+
+/*
+loadCart(fun) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+
+    fun();
+
+  });
+
+  xhr.open('GET', 'http://supersimplebackend.dev/cart')
+  xhr.send();
+}
+*/

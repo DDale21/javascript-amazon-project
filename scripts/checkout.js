@@ -1,17 +1,26 @@
 import { renderOrderSummary } from './checkout/orderSummary.js';
 import { renderPaymentSummary } from './checkout/paymentSummary.js';
 import { renderCheckoutHeader } from './checkout/checkoutHeader.js';
-import { loadProducts, loadProductsFetch } from '../data/products.js'
+import { loadProductsFetch } from '../data/products.js'
 import { cart } from '../data/cart-class.js'
 
 async function loadPage() {
+  await Promise.all([
+    loadProductsFetch(),
+    cart.loadCartFetch()
+  ]);
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+}
+
+loadPage();
+
+/*
+async function loadPage() {
   try {
     await loadProductsFetch();
-    await new Promise((resolve) => {
-      cart.loadCart(() => {
-        resolve();
-      });
-    });
+    await cart.loadCartFetch();
   } catch(error) {
     console.log(error);
   }
@@ -20,8 +29,8 @@ async function loadPage() {
   renderOrderSummary();
   renderPaymentSummary();
 }
+*/
 
-loadPage();
 /*
 Promise.all([
   loadProductsFetch(),
