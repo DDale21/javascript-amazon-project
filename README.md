@@ -1,9 +1,9 @@
 **Amazon Online Store Clone**
 
 This project is a clone of Amazon's online store, built by following a YouTube tutorial made by SuperSimpleDev.
-I am building this project as a learning exercise to enhance and broaden my skills in full-stack development, allowing me to gain hands-on experience with building a complex web application.
-This will serve as a preparation for future projects.
-Throughout this project, I will demonstrate and continue to enhance my Git knowledge for managing projects.
+I am building this project as a learning exercise to enhance and broaden my skills in full-stack web development.
+The tutorial will only serve as the foundation, I will continue to apply my knowledge throughout the development.
+Git will be used to manage changes in this project.
 
 
 Project Overview
