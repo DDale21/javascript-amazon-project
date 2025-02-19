@@ -1,6 +1,6 @@
 **Amazon Online Store Clone**
 
-This project is a clone of Amazon's online store, built by following a YouTube tutorial made by SuperSimpleDev.
+This project is a clone of Amazon's online store, built as part of a JavaScript course made by SuperSimpleDev.
 I am building this project as a learning exercise to enhance and broaden my skills in full-stack web development.
 The tutorial will only serve as the foundation, I will continue to apply my knowledge throughout the development.
 Git will be used to manage changes in this project.
@@ -36,4 +36,4 @@ It does not include all features of Amazon and is not affiliated with Amazon in 
 All credits goes to SuperSimpleDev.
 
 SuperSimpleDev channel: https://www.youtube.com/@SuperSimpleDev
-Tutorial: https://www.youtube.com/watch?v=EerdGm-ehJQ
+Course: https://www.youtube.com/watch?v=EerdGm-ehJQ
